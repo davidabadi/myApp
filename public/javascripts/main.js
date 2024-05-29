@@ -1,3 +1,7 @@
+
+const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
+const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
+
 function myFunction(e) {
   e.preventDefault();
   const input = document.getElementById("stock").value;
@@ -7,18 +11,20 @@ function myFunction(e) {
 }
 
 function getStocks(input) {
-  axios
-    .get(`/api/prices/${input}`, {
-      json: true,
-    })
-    .then((response) => {
-      console.log(response.data);
-      populateTable(response.data);
-    })
-    .catch((error) => {
-      console.error(error);
-    });
-  setTimeout(arguments.callee, 5000);
+  populateTable([]);
+
+  // axios
+  //   .get(`/api/prices/${input}`, {
+  //     json: true,
+  //   })
+  //   .then((response) => {
+  //     console.log(response.data);
+  //     populateTable(response.data);
+  //   })
+  //   .catch((error) => {
+  //     console.error(error);
+  //   });
+  // setTimeout(arguments.callee, 5000);
 }
 
 function populateTable(data) {
@@ -45,7 +51,7 @@ function populateTable(data) {
 
     tableBody.appendChild(a);
   });
-  document.getElementById("table").classList.remove("hidden");
+  document.getElementById("table").classList.remove("d-none");
 }
 
 function generateRandomArray(amount) {
